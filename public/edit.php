@@ -68,6 +68,7 @@ if(isset($_POST['send'])) {
 
             <li>
                 <input type="submit" name="send" value="Upravit">
+                <a class="back-link" href="show">Zpět</a>
             </li>
         </ul>
     </form>

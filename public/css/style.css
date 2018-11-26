@@ -110,3 +110,23 @@
 .userArea {
     float: right;
 }
+
+
+.back-link {
+    background-color: red;
+    box-shadow: 0 5px 0 darkred;
+    color: white;
+    padding: 0.5em 1.5em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.back-link:hover {
+    background-color: #ce0606;
+}
+
+.back-link:active {
+    box-shadow: none;
+    top: 5px;
+}
