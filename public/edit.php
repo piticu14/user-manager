@@ -45,7 +45,8 @@ if(isset($_POST['send'])) {
         }
         $user->patch($params);
 
-        $userData = $user->findBy($_GET['id'],'id');
+        header("Location: ../show");
+        exit();
     }
 }
 ?>
