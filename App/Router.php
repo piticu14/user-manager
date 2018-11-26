@@ -18,7 +18,7 @@ class Router
                 $homepage = new Homepage();
                 $homepage->render();
             } else {
-                include_once __DIR__ . '/../Resources/404.php';
+                include_once __DIR__ . '/../public/404.php';
                 die();
             }
         } else {
@@ -35,7 +35,7 @@ class Router
                     }
                     $class->$methodName($id);
                 } else {
-                    include_once __DIR__ . '/../Resources/404.php';
+                    include_once __DIR__ . '/../public/404.php';
                     die();
                 }
 

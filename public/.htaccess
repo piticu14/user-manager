@@ -1,0 +1,19 @@
+# https://medium.com/shecodeafrica/building-your-own-custom-php-framework-part-1-1d24223bab18
+
+Allow from all
+
+RewriteEngine On
+#RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^index\.php$ - [L]
+
+RewriteRule ^([^/]+)/?$ index.php?page=$1 [L,QSA]
+
+RewriteRule ^([^/]+)/([0-9]+)?$ index.php?page=$1&id=$2 [L,QSA]
+
+#RewriteRule ^(.+)$ index.php/$1 [L]
+
+

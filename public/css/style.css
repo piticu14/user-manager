@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+.container{
+    width:80%;
+    margin:0 auto;
+}
+
+.flex-outer {
+    list-style-type: none;
+    padding: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.flex-outer li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.flex-outer > li > label {
+    flex: 1 0 120px;
+    max-width: 220px;
+}
+
+.flex-outer li label,
+.flex-outer li p {
+    padding: 8px;
+    font-weight: 300;
+    letter-spacing: .09em;
+}
+
+.flex-outer li input[type="submit"] {
+    margin: auto;
+    margin-top: 1em;
+    padding: 8px 16px;
+    border: none;
+    background: #333;
+    color: #f2f2f2;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border-radius: 2px;
+}
+
+.flex-outer > li > label + * {
+    flex: 1 0 50px;
+}
+
+.container p {
+    text-align: center;
+}
+.container p > a{
+    text-decoration: none;
+    color: dodgerblue;
+    font-size:1.5em;
+}
+
+.container p > a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+
+.error {
+    width: 50%;
+    margin: 0 auto;
+    margin-top:1em;
+    border-radius:.2em;
+    box-shadow:1px 1px 3px #888;
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+
+#users {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#users td, #users th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users tr:nth-child(even){background-color: #f2f2f2;}
+
+#users tr:hover {background-color: #ddd;}
+
+#users th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.footer {
+    width:100%;
+    margin:0 auto;
+    background-color: #333;
+}
+
+.footer {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.userArea {
+    float: right;
+}
