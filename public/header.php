@@ -1,9 +1,10 @@
 <?php
 use App\User;
 use App\Database;
+use App\Session;
 
-if(isset($_SESSION['id'])) {
-    $user = (new User(Database::getInstance()))->findBy($_SESSION['id'], 'id');
+if(Session::exist('id')) {
+    $user = (new User(Database::getInstance()))->findBy(Session::get('id'), 'id');
     if($user) {
         $username = $user['username'];
     }
@@ -22,7 +23,13 @@ if(isset($_SESSION['id'])) {
 <body>
 <div class="container">
     <?php if(isset($username)) :?>
-    <div class="userArea">
-        <p>Vitejte, <?= $username?> <a href="logout">Odhlásit</a></p>
+    <div id="userArea">
+        <p>
+            Vitejte, <a id="welcome" href="edit/<?= Session::get('id')?>"><?= $username?></a>
+
+        </p>
+        <p>
+            <a href="logout">Odhlásit</a>
+        </p>
     </div>
     <?php endif ?>

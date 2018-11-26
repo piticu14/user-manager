@@ -5,12 +5,12 @@ use App\Authenticator;
 use App\UserChecker;
 use App\User;
 use App\UserDetails;
-
+use App\Session;
 $title = 'Přihlašování';
 include_once ('header.php');
 
-if(isset($_SESSION['id'])) {
-    $user = (new User(Database::getInstance()))->findBy($_SESSION['id'], 'id');
+if(Session::exist('id')) {
+    $user = (new User(Database::getInstance()))->findBy(Session::get('id'), 'id');
     if($user) {
         header("Location: show");
         exit();

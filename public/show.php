@@ -2,8 +2,9 @@
 
 use App\User;
 use App\Database;
+use App\Session;
 
-if(!isset($_SESSION['id'])) {
+if(!Session::exist('id')) {
     header("Location: signin");
     exit();
 }
@@ -44,31 +45,24 @@ $users = (new User($database))->all();
         </tr>
     <?php endforeach; ?>
     </tbody>
-
 </table>
+<div id="new-user">
+    <a href="create">Nový uživatel</a>
+</div>
 
 <?php include_once('footer.php'); ?>
 
 <script>
     $(document).ready(function() {
-        <?php if(isset($_SESSION['id'])) :?>
+        // Pokud je uzivatel online, aktualizuj jeho aktivni cas
+        <?php if(Session::exist('id')) :?>
         function update_user_activity() {
-            var action = 'update_time';
-            $.post('action', {action: action}, function(data, status){
-
-            });
+            $.post('update-activity');
         }
             setInterval(function() {
                 update_user_activity();
-            }, 50000);
+            }, 60 * 5 * 1000);
 
-        <?php else: ?>
-        function fetch_user_login_data() {
-            var var_action = "fetch_data";
-            $.post('action', {action: action}, function(data, status){
-
-            });
-        }
-        <?php endif;?>
+        <?php endif; ?>
     });
 </script>

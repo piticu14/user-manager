@@ -2,8 +2,9 @@
 use App\User;
 use App\Database;
 use App\UserChecker;
+use App\Session;
 
-if(!isset($_SESSION['id'])) {
+if(!Session::exist('id')) {
     header("Location: ../signin");
     exit();
 }

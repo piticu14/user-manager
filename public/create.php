@@ -5,18 +5,14 @@ use App\User;
 use App\UserChecker;
 use App\Session;
 
-$title = 'Registrace';
-include_once('header.php');
-
-
-if(Session::exist('id')) {
-    $user = (new User(Database::getInstance()))->findBy(Session::get('id'), 'id');
-    if($user) {
-        header("Location: show");
-        exit();
-    }
+if(!Session::exist('id')) {
+    header("Location: signin");
+    exit();
 }
 
+
+$title = 'Nový uživatel';
+include_once('header.php');
 
 if(isset($_POST['send'])) {
     $user = new User(Database::getInstance());
@@ -81,7 +77,6 @@ if(isset($_POST['send'])) {
         </ul>
 
     </form>
-    <p><a href="signin">Přihlásit se</a></p>
 <?php if(isset($errors)) : ?>
     <?php foreach ($errors as $error): ?>
         <p class="error"><?= $error ?></p>

@@ -28,7 +28,7 @@ class Authenticator
             list($username, $password) = $credentials;
 
             $user = $this->user->findBy($username, 'username');
-            $_SESSION['id'] = $user['id'];
+            Session::set('id',$user['id']);
 
             $this->addUserDetails($user['id']);
 
@@ -49,10 +49,10 @@ class Authenticator
 
         $userDetails = $this->userDetails->findBy($userId, 'user_id');
         if ($userDetails) {
-            $_SESSION['details_id'] = $userDetails['id'];
+            Session::set('details_id',$userDetails['id']);
         } else {
             $this->userDetails->store($params);
-            $_SESSION['details_id'] = $this->userDetails->lastInsertedId();
+            Session::set('details_id',$this->userDetails->lastInsertedId());
         }
 
     }
