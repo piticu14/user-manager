@@ -1,19 +1,19 @@
 <?php
 
+use App\Database;
+use App\User;
+
 if(isset($_POST['send'])) {
-    $database = new \App\Database();
-    $user = new \App\User($database);
+    $user = new User(Database::getInstance());
 
     $params = [
         'username' => $_POST['username'],
         'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
-        'email' => $_POST['email']
     ];
 
     $user->store($params);
 
 }
-
 
 ?>
 
@@ -21,7 +21,9 @@ if(isset($_POST['send'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>404 - Not found</title>
+    <title>Registrace</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width;initial-scale=1">
 </head>
 <body>
 <div style="margin:0 auto">
@@ -34,11 +36,6 @@ if(isset($_POST['send'])) {
             <label for="password">Heslo:</label>
             <input type="password" name="password" id="password">
         </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email">
-        </div>
-
         <div>
             <input type="submit" name="send" value="Vytvořit">
         </div>
