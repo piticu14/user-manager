@@ -16,7 +16,7 @@ $database = Database::getInstance();
 $user = new User($database);
 
 if(isset($_GET['id'])){
-    $userData = $user->find($_GET['id']);
+    $userData = $user->findBy($_GET['id'],'id');
     if(!$userData) {
         header("Location: ../404.php" );
         exit();
@@ -45,7 +45,7 @@ if(isset($_POST['send'])) {
         }
         $user->patch($params);
 
-        $userData = $user->find($_GET['id']);
+        $userData = $user->findBy($_GET['id'],'id');
     }
 }
 ?>

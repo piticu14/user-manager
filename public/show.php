@@ -60,7 +60,7 @@ $users = (new User($database))->all();
         }
             setInterval(function() {
                 update_user_activity();
-            }, 5000);
+            }, 50000);
 
         <?php else: ?>
         function fetch_user_login_data() {

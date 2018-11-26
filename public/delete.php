@@ -21,7 +21,7 @@ if($_POST['id'] == $_SESSION['id']) {
         if($details) {
             $lastActivityDate = new DateTime($details['last_activity']);
             $now = new \DateTime();
-            if($lastActivityDate->diff($now)->s < 10) {
+            if($lastActivityDate->diff($now)->i < 8) {
                 echo "error";
             } else {
                 $user->destroy($_POST['id']);
