@@ -8,6 +8,7 @@ class UsersController extends Controller
 
     public function renderUsers()
     {
+        $this->updateActivity();
         if (!$this->authenticator->isLoggedIn()) {
             $this->redirect('signin');
         }

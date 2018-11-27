@@ -25,6 +25,7 @@ class SigninController extends Controller
                 $password = trim($data['password']);
 
                 if ($this->authenticator->authenticate(array($username, $password))) {
+                    $this->updateActivity();
                     $this->redirect('users');
 
                 } else {

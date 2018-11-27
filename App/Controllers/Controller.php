@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: pitic
- * Date: 11/26/2018
- * Time: 10:49 PM
- */
 
 namespace App\Controllers;
 
@@ -13,6 +7,7 @@ use App\User;
 use App\UserChecker;
 use App\UserDetails;
 use App\Authenticator;
+use App\Session;
 
 class Controller
 {
@@ -28,7 +23,7 @@ class Controller
         $this->database = Database::getInstance();
         $this->user = new User($this->database);
         $this->userChecker = new UserChecker($this->database);
-        $this->userDetails = new UserDetails($this->database);
+        $this->userDetails = new UserDetails($this->database,);
         $this->authenticator = new Authenticator($this->user, $this->userDetails);
 
     }
@@ -53,6 +48,17 @@ class Controller
                 die();
             }
         }
+    }
+
+    public function updateActivity() {
+        if (!$this->authenticator->isLoggedIn()) {
+            $this->redirect('signin');
+        }
+        $params = [
+            'last_activity' => date("Y-m-d H:i:s", STRTOTIME(date('h:i:sa'))),
+            'id' => Session::get('details_id')
+        ];
+        $this->userDetails->patch($params);
     }
 
 }

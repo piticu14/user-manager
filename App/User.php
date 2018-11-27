@@ -60,4 +60,5 @@ class User
         $this->database->getLastInsertedId();
     }
 
+
 }

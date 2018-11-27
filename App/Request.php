@@ -8,7 +8,7 @@ class Request
 
     public function process($page)
     {
-        if($page === 'index.php') $page = 'signup';
+        if($page === 'index.php') $page = 'signin';
         $controllerName = '\App\Controllers\\' . ucfirst($page) . 'Controller';
         if (class_exists($controllerName)) {
             $controller = new $controllerName;

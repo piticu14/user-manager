@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: pitic
- * Date: 11/26/2018
- * Time: 11:34 PM
- */
 
 namespace App\Controllers;
 
@@ -17,6 +11,8 @@ class EditController extends Controller
 
     public function renderEdit($id = null)
     {
+        $this->updateActivity();
+
         if ($id) {
             if (!$this->authenticator->isLoggedIn()) {
                 $this->redirect('signin');
@@ -37,6 +33,8 @@ class EditController extends Controller
 
     public function actionEdit(Request $request)
     {
+        $this->updateActivity();
+
         if (!$this->authenticator->isLoggedIn()) {
             $this->redirect('signin');
         }

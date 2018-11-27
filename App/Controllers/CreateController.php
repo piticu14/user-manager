@@ -10,6 +10,8 @@ class CreateController extends Controller
 
     public function renderCreate()
     {
+        $this->updateActivity();
+
         if (!$this->authenticator->isLoggedIn()) {
             $this->redirect('signin');
         } else {
@@ -20,6 +22,8 @@ class CreateController extends Controller
 
     public function actionCreate(Request $request)
     {
+        $this->updateActivity();
+
         $data = $request->getPost();
         if (!empty($data)) {
             if (isset($data['send'])) {

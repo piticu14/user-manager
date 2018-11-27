@@ -55,6 +55,7 @@ class SignupController extends Controller
     public function renderSignup()
     {
         if ($this->authenticator->isLoggedIn()) {
+            $this->updateActivity();
             $this->redirect('users');
         }
         $this->render('signup');

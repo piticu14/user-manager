@@ -11,6 +11,8 @@ class DeleteController extends Controller
 
     public function actionDelete(Request $request)
     {
+        $this->updateActivity();
+
         if (!$this->authenticator->isLoggedIn()) {
             $this->redirect('signin');
         }
