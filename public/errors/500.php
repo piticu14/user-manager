@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>404 - Not found</title>
+    <title>500 - Internal Error</title>
 </head>
 <body>
 <div style="margin:0 auto">
     <h1 style="text-align:center">
-        Stránka nebyla nalezená.
+        Váš požadavek nemohl být dokončen
     </h1>
 </div>
 

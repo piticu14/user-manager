@@ -2,17 +2,9 @@
 
 require_once(__DIR__ . "/../vendor/autoload.php");
 
-if (isset($_GET['page']) && ($_GET['page'] === 'index.php')) {
-    include_once __DIR__ . '/signup.php';
+use App\Request;
 
-} else {
-    session_start();
-    $resource = __DIR__ . '/' . $_GET['page'] . '.php';
+session_start();
+$request = new Request();
 
-    if(file_exists($resource)) {
-        include_once $resource;
-    } else {
-        include_once __DIR__ . '/errors/404.php';
-        die();
-    }
-}
+$request->process($_GET['page']);

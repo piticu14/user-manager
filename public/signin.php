@@ -1,55 +1,9 @@
 <?php
-
-use App\Database;
-use App\Authenticator;
-use App\UserChecker;
-use App\User;
-use App\UserDetails;
-use App\Session;
 $title = 'Přihlašování';
-include_once ('header.php');
+include_once('header.php');
+?>
 
-if(Session::exist('id')) {
-    $user = (new User(Database::getInstance()))->findBy(Session::get('id'), 'id');
-    if($user) {
-        header("Location: show");
-        exit();
-    }
-}
-
-if(isset($_POST['send'])) {
-    $errors = [];
-    $userChecker = new UserChecker(Database::getInstance());
-
-    if(!$userChecker->isUsernameValid($_POST['username'])){
-        $errors[] = 'Uživatelské jméno není v pořádku.';
-    }
-
-    if (!$userChecker->isPasswordValid($_POST['password'])) {
-        $errors[] =  'Heslo není v pořádku.';
-    }
-    if(empty($errors)) {
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-
-        $database = Database::getInstance();
-        $user = new User($database);
-        $userDetails = new UserDetails($database);
-        $authentication = new Authenticator($user, $userDetails);
-
-        if(!$authentication->authenticate(array($username, $password))) {
-            $errors[] = 'Přihlašování se nepovedlo.';
-        }else {
-                header("Location: show");
-                exit();
-            }
-        }
-
-    }
-
-    ?>
-
-    <form method="POST" action="">
+    <form method="POST" action="signin">
         <ul class="flex-outer">
             <li>
                 <label for="username">Uživatelské jméno:</label>
@@ -66,10 +20,5 @@ if(isset($_POST['send'])) {
 
     </form>
     <p><a href="signup">Zaregistrovat se</a></p>
-    <?php if(isset($errors)) : ?>
-        <?php foreach ($errors as $error): ?>
-            <p class="error"><?= $error ?></p>
-        <?php endforeach;?>
-    <?php endif; ?>
 
-    <?php include_once ('footer.php'); ?>
+<?php include_once('footer.php'); ?>

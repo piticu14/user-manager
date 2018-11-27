@@ -1,15 +1,15 @@
-jQuery(document).ready(function(){
+$(document).ready(function(){
     $(document).on('click','.delete',function(e){
         e.preventDefault();
 
         $.post($(this).attr('href'), {id: $(this).data('id')}, function(data, status) {
-            //alert("Data: " + data + "\nStatus: " + status);
+            $('.container').find('.error').remove();
             if(data === "error") {
                 var errorTag = $('.container').find('.error');
                 if(errorTag.length) {
                     errorTag.remove();
                 }
-                $('.container').prepend('<p class="error">User is online a cannot be deleted.</p>');
+                $('.container').prepend('<p class="error">Uživatel je online a nelze odstranit.</p>');
 
             } else {
                 var users = JSON.parse(data);
@@ -32,5 +32,8 @@ jQuery(document).ready(function(){
 
         });
     });
-
 });
+
+function update_user_activity() {
+    $.post('updateActivity');
+}

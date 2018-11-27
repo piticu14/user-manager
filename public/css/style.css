@@ -95,6 +95,16 @@
     color: white;
 }
 
+#users td a {
+    color: dodgerblue;
+    text-decoration: none;
+ }
+
+#users td a:hover {
+    color : #555555;
+    text-decoration: underline;
+}
+
 .footer {
     width:100%;
     margin:0 auto;
@@ -163,3 +173,17 @@
     background-color: #555555;
     color: white;
 }
+
+#logout input[type="submit"]{
+    padding: 10px 20px;
+    color:white;
+    background-color: dodgerblue;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+#logout input[type="submit"]:hover{
+    background-color: #555555;
+    color: white;}
+
+

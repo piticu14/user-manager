@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: pitic
- * Date: 11/26/2018
- * Time: 7:44 PM
- */
 
 namespace App;
 
@@ -12,16 +6,28 @@ namespace App;
 class Session
 {
 
-    public static function get($name) {
-        return $_SESSION[$name];
+    public static function get($name)
+    {
+        if (self::exist($name)) {
+            return $_SESSION[$name];
+        }
     }
 
-    public static function exist($name) {
+    public static function exist($name)
+    {
         return isset($_SESSION[$name]);
     }
 
-    public static function set($name, $value) {
+    public static function set($name, $value)
+    {
         $_SESSION[$name] = $value;
+    }
+
+    public static function erase($name)
+    {
+        if (self::exist($name)) {
+            unset($_SESSION[$name]);
+        }
     }
 
 }
