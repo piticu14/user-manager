@@ -23,11 +23,22 @@ class Session
         $_SESSION[$name] = $value;
     }
 
-    public static function erase($name)
+    public static function erase($name = null)
     {
-        if (self::exist($name)) {
-            unset($_SESSION[$name]);
+        if($name) {
+            if (self::exist($name)) {
+                unset($_SESSION[$name]);
+            }
+        } else {
+            session_unset();
         }
+    }
+
+
+    public static function destroy()
+    {
+        self::erase();
+        session_destroy();
     }
 
 }

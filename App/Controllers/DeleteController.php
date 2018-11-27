@@ -11,11 +11,14 @@ class DeleteController extends Controller
 
     public function actionDelete(Request $request)
     {
-        $this->updateActivity();
 
         if (!$this->authenticator->isLoggedIn()) {
+            Session::destroy();
             $this->redirect('signin');
         }
+
+        $this->updateActivity();
+
         $data = $request->getPost();
         if ($data) {
             if ($data['id'] == Session::get('id')) {

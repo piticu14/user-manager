@@ -5,18 +5,20 @@ namespace App\Controllers;
 
 use App\Errors;
 use App\Request;
+use App\Session;
 
 class EditController extends Controller
 {
 
     public function renderEdit($id = null)
     {
-        $this->updateActivity();
 
         if ($id) {
             if (!$this->authenticator->isLoggedIn()) {
+                Session::destroy();
                 $this->redirect('signin');
             }
+            $this->updateActivity();
             if (isset($id)) {
                 $userData = $this->user->findBy($id, 'id');
                 if ($userData) {
@@ -36,6 +38,7 @@ class EditController extends Controller
         $this->updateActivity();
 
         if (!$this->authenticator->isLoggedIn()) {
+            Session::destroy();
             $this->redirect('signin');
         }
         Errors::erase();

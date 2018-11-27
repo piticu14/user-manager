@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Errors;
 use App\Request;
+use App\Session;
 
 class SigninController extends Controller
 {
@@ -25,7 +26,6 @@ class SigninController extends Controller
                 $password = trim($data['password']);
 
                 if ($this->authenticator->authenticate(array($username, $password))) {
-                    $this->updateActivity();
                     $this->redirect('users');
 
                 } else {
@@ -43,8 +43,10 @@ class SigninController extends Controller
     public function renderSignin()
     {
         if ($this->authenticator->isLoggedIn()) {
+            $this->updateActivity();
             $this->redirect('users');
         }
+
         $this->render('signin');
         Errors::erase();
     }

@@ -23,7 +23,7 @@ class Controller
         $this->database = Database::getInstance();
         $this->user = new User($this->database);
         $this->userChecker = new UserChecker($this->database);
-        $this->userDetails = new UserDetails($this->database,);
+        $this->userDetails = new UserDetails($this->database);
         $this->authenticator = new Authenticator($this->user, $this->userDetails);
 
     }
@@ -54,6 +54,8 @@ class Controller
         if (!$this->authenticator->isLoggedIn()) {
             $this->redirect('signin');
         }
+        var_dump(Session::get('details_id'));
+        die();
         $params = [
             'last_activity' => date("Y-m-d H:i:s", STRTOTIME(date('h:i:sa'))),
             'id' => Session::get('details_id')

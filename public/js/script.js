@@ -35,5 +35,10 @@ $(document).ready(function(){
 });
 
 function update_user_activity() {
-    $.post('updateActivity');
+    $.ajax({
+        url: 'updateActivity',
+        method: 'post',
+        cache: false,
+
+    });
 }

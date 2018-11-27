@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 
 class Authenticator
 {
@@ -20,6 +21,7 @@ class Authenticator
         if ($this->checkCredentials($credentials)) {
             list($username, $password) = $credentials;
             $user = $this->user->findBy($username, 'username');
+            Session::erase();
             Session::set('id', $user['id']);
             Session::set('username', $user['username']);
             $this->addUserDetails($user['id']);
@@ -32,14 +34,21 @@ class Authenticator
 
     private function addUserDetails($userId)
     {
-        $params = [
-            'user_id' => $userId,
-            'last_activity' => date("Y-m-d H:i:s", STRTOTIME(date('h:i:sa')))
-        ];
+        Session::erase('details_id');
+
         $userDetails = $this->userDetails->findBy($userId, 'user_id');
         if ($userDetails) {
+            $params = [
+                'id' => $userDetails['id'],
+                'last_activity' => date("Y-m-d H:i:s", STRTOTIME(date('h:i:sa')))
+            ];
             Session::set('details_id', $userDetails['id']);
+            $this->userDetails->patch($params);
         } else {
+            $params = [
+                'user_id' => $userId,
+                'last_activity' => date("Y-m-d H:i:s", STRTOTIME(date('h:i:sa')))
+            ];
             $this->userDetails->store($params);
             Session::set('details_id', $this->userDetails->lastInsertedId());
         }
@@ -59,19 +68,21 @@ class Authenticator
 
     public function isLoggedIn()
     {
-        if (Session::exist('id')) {
-            $user = $this->user->findBy(Session::get('id'), 'id');
-            if ($user) return true;
-            return false;
+        $loggedIn = false;
+        if (Session::exist('details_id')) {
+            $userDetails = $this->userDetails->findBy(Session::get('details_id'));
+                $userLastActivity = new DateTime($userDetails['last_activity']);
+                if(time() - $userLastActivity->getTimestamp() < 1800) {
+                    $loggedIn = true;
+                }
         }
-        return false;
+        return $loggedIn;
     }
 
     public function logout()
     {
         if (Session::exist('id')) {
-            session_unset();
-            session_destroy();
+           Session::destroy();
         }
     }
 

@@ -20,7 +20,7 @@ include_once("footer.php"); ?>
 <script>
     /**
      * Pokud je uzivatel online,
-     * aktualizuj jeho aktivni stav kazdou 1 minut
+     * aktualizuj jeho aktivni stav kazdou minutu
      */
     <?php
     use App\Session;
@@ -28,7 +28,7 @@ include_once("footer.php"); ?>
     ?>
     setInterval(function () {
         update_user_activity();
-    },60 * 1 * 1000);
+    }, 60 * 1000);
     <?php endif; ?>
 </script>
 </html>

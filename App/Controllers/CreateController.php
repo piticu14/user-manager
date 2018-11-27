@@ -4,20 +4,22 @@ namespace App\Controllers;
 
 use App\Errors;
 use App\Request;
+use App\Session;
 
 class CreateController extends Controller
 {
 
     public function renderCreate()
     {
-        $this->updateActivity();
-
         if (!$this->authenticator->isLoggedIn()) {
+            Session::destroy();
             $this->redirect('signin');
         } else {
+            $this->updateActivity();
             $this->render('create');
             Errors::erase();
         }
+
     }
 
     public function actionCreate(Request $request)
