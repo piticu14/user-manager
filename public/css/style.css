@@ -42,6 +42,10 @@
     letter-spacing: .09em;
     border-radius: 2px;
 }
+.flex-outer li input[type="submit"]:hover {
+    background: #505050;
+    cursor: pointer;
+}
 
 .flex-outer > li > label + * {
     flex: 1 0 50px;
