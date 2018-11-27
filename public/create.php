@@ -23,6 +23,7 @@ include_once('header.php');
 
             <li>
                 <input type="submit" name="send" value="Vytvořit">
+                <a class="back-link" href="users">Zpět</a>
             </li>
         </ul>
     </form>
